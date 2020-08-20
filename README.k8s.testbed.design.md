@@ -41,29 +41,38 @@ spec:
 
 In order to connect each SONiC DUT to a High Availability Kubernetes master, we need to set up the following topology: 
 ![alt text](https://github.com/isabelmsft/k8s-ha-master/blob/master/k8s-testbed-diagram.PNG)
-
-- Each high availability master setup requires four new Linux KVMs running on Starlab server(s) via bridged networking.
+- Each high availability master setup requires 4 new Linux KVMs running on Starlab server(s) via bridged networking.
     - KVM Bridged networking in 10.64.246.0/23 subnet allows for connectivity from SONiC DUTs in Starlab. 
 - Kubernetes testing requires 4 additional KVMs: 
     - 3 Linux KVMs to serve as 3-node high availability Kubernetes master
     - 1 Linux KVM to serve as HAProxy Load Balancer node
-- For the initial set up of the high availability master, an Ansible agent is required to run the Ansible jobs to set up and configure the HA functionality through the four Linux KVMs mentioned above. 
+- For the initial set up of the high availability master, an Ansible agent is required to run the Ansible jobs to set up and configure the HA functionality through the 4 Linux KVMs mentioned above. 
 
-## We aim to test the following functionalities: 
+## Testing Scope
+
+This setup allows us to test the following: 
 - Successful deployment of SONiC containers via manifests defined in master
-- Automatic recreation of container after being (intentionally or accidentally) stopped
-- Switching between Local and Kubernetes management mode
+- Expected container behavior after the container is intentionally or unintentionally stopped
+- Switching between Local and Kubernetes management mode for a given container
+  - Addition and removal of SONiC DUT labels
 
 During each of the following states:
-- When all masters are up and running
-- When one master is down
-- When two masters are down
-- When all masters are down
-
+- When all master servers are up and running
+- When one master server is down
+- When two master servers are down
+- When all master servers are down
 Down: shut off, disconnected, or in the middle of reboot
 
 In this setup, we do not consider:
-- Load balancer performance. In our case, HAProxy is configured to perform vanilla round-robin load balancing with health checking.
+- Load balancer performance. In our case, HAProxy is configured to perform vanilla round-robin load balancing on available master servers. In production, we will use BGPSpeaker anycast routing to support high availability master performance. 
 
-In order to perform tests, the client must have the ability to request 
-The preexisting way to do this is 
+## How to Setup High Availability Kubernetes Master
+1. Allocate 4 available IPs in 10.64.246.0/23 subnet.
+2. Spin up 4 new KVMs (3 master servers, 1 HAProxy server) using the IPs above. 
+3. From Ansible agent (could be set up on Starlab server), run the Ansible jobs in this repository.
+4. Join Kubernetes-enabled SONiC DUT to cluster (kube_join function to be written)
+
+## How to Create Tests
+Each manifest is a yaml file
+CLI to make changes to manifest files
+pytests to check status
