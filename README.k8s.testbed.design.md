@@ -43,7 +43,7 @@ In order to connect each SONiC DUT to a High Availability Kubernetes master, we 
 ![alt text](https://github.com/isabelmsft/k8s-ha-master/blob/master/k8s-testbed-diagram.PNG)
 - Each high availability master setup requires 4 new Linux KVMs running on Starlab server(s) via bridged networking.
     - KVM Bridged networking in 10.64.246.0/23 subnet allows for connectivity from SONiC DUTs in Starlab. 
-- Kubernetes testing requires 4 additional KVMs: 
+- The 4 new KVMs are as follows: 
     - 3 Linux KVMs to serve as 3-node high availability Kubernetes master
     - 1 Linux KVM to serve as HAProxy Load Balancer node
 - For the initial set up of the high availability master, an Ansible agent is required to run the Ansible jobs to set up and configure the HA functionality through the 4 Linux KVMs mentioned above. 
