@@ -77,4 +77,4 @@ Each manifest is a yaml file
 
 CLI to make changes to manifest files
 
-pytests to check status
+pytests to apply manifest changes and check status
