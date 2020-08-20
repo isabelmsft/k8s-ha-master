@@ -64,7 +64,7 @@ During each of the following states:
 Down: shut off, disconnected, or in the middle of reboot
 
 
-In this setup, we do not consider load balancer performance. In our case, HAProxy is configured to perform vanilla round-robin load balancing on available master servers. In production, we will use BGPSpeaker anycast routing to support high availability master performance. Testing of BGPSpeaker load balancing performance is beyond the scope of this design.
+In this setup, we do not consider load balancer performance. For Kubernetes feature testing purposes, HAProxy is configured to perform vanilla round-robin load balancing on available master servers. In production, we will use BGPSpeaker anycast routing to support high availability master performance. Testing of BGPSpeaker load balancing performance is beyond the scope of this design.
 
 ## How to Setup High Availability Kubernetes Master
 1. Allocate 4 available IPs in 10.64.246.0/23 subnet.
