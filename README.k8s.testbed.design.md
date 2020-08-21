@@ -62,6 +62,7 @@ During each of the following states:
 - When one master server is down
 - When two master servers are down
 - When all master servers are down
+
 Down: shut off, disconnected, or in the middle of reboot
 
 
