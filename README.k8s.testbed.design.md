@@ -55,6 +55,7 @@ This setup allows us to test the following:
 - Expected container behavior after the container is intentionally or unintentionally stopped
 - Switching between Local and Kubernetes management mode for a given container
   - Addition and removal of SONiC DUT labels
+- Changing image version in middle of Daemonset deployment
 
 During each of the following states:
 - When all master servers are up and running
@@ -68,7 +69,7 @@ In this setup, we do not consider load balancer performance. For Kubernetes feat
 
 ## How to Setup High Availability Kubernetes Master
 1. Allocate 4 available IPs in 10.64.246.0/23 subnet.
-2. Spin up 4 new KVMs (3 master servers, 1 HAProxy server) using the IPs above. 
+2. Spin up 4 new KVMs (3 master servers, 1 HAProxy server) using the IPs above.<Was using virt-install, will port this to an Ansible job to automate) 
 3. From Ansible agent (could be set up on Starlab server), run the Ansible jobs in this repository.
 4. Join Kubernetes-enabled SONiC DUT to cluster (kube_join function to be written)
 
