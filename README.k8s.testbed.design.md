@@ -4,13 +4,13 @@ This document describes the design to test Kubernetes features in SONiC.
 
 ## Background
 
-Each SONiC DUT is a worker node managed by a High Availability Kubernetes master in Starlab. 
+Each SONiC DUT is a worker node managed by a High Availability Kubernetes master in Starlab. The High Availability Kubernetes master is composed of multiple master nodes.
 
 By connecting each SONiC DUT to HA Kubernetes master, containers running in SONiC can be managed by the Kubernetes master. SONiC containers managed by the Kubernetes master are termed to be running in "Kubernetes mode" as opposed to the original "Local mode." 
 
-In Kubernetes mode, SONiC container properties are based on specifications defined in the associated Kubernetes manifest. A Kubernetes manifest is a file in the Kubernetes master that defines the Kubernetes object and container configurations. In our case, we use Kubernetes Daemonset objects. The Kubernetes Daemonset object ensures that each worker node is running one container of the image specified in the Daemonset manifest file.  
+In Kubernetes mode, SONiC container properties are based on specifications defined in the associated Kubernetes manifest. A Kubernetes manifest is a file in the Kubernetes master that defines the Kubernetes object and container configurations. In our case, we use Kubernetes Daemonset objects. The Kubernetes Daemonset object ensures that each worker node is running exactly one container of the image specified in the Daemonset manifest file.  
 
-For example, in order to run Analytic and Telemetry containers in Kubernetes mode, we must have two manifests that define two Kubernetes Daemonset objects- one for each container running in "Kubernetes mode." 
+For example, in order to run SNMP and Telemetry containers in Kubernetes mode, we must have two manifests that define two Kubernetes Daemonset objects- one for each container running in "Kubernetes mode." 
 
 The following is a snippet of the Telemetry Daemonset manifest file that specifies the Kubernetes object type and container image:
 
