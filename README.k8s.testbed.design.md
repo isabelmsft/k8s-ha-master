@@ -71,7 +71,7 @@ In this setup, we do not consider load balancer performance. For Kubernetes feat
 ## How to Setup High Availability Kubernetes Master
 1. Allocate 4 available IPs in 10.64.246.0/23 subnet.
 2. Spin up 4 new KVMs (3 master servers, 1 HAProxy server) using the IPs above.<Was using virt-install, will port this to an Ansible job to automate) 
-3. From Ansible agent (could be set up on Starlab server), run the Ansible jobs in this repository.
+3. From Ansible agent (could be set up on Starlab server or using sonic-mgmt container), run the Ansible jobs in this repository.
 4. Join Kubernetes-enabled SONiC DUT to cluster (kube_join function to be written)
 
 ## How to Create Tests
